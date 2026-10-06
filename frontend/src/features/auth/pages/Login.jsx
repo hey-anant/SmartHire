@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import { useState } from 'react'
 import "../auth.form.scss"
 import { useNavigate,Link, Navigate } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
@@ -6,7 +6,7 @@ import AuthLoading from '../components/AuthLoading'
 
 const Login = () => {
 
-  const {user, loading, initializing, handleLogin}=useAuth()
+  const {user, initializing, handleLogin}=useAuth()
   const navigate=useNavigate()
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")

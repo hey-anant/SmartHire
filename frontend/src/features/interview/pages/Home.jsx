@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import "../style/home.scss"
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate } from 'react-router'
@@ -174,7 +174,7 @@ const Home = () => {
                   <div className="dc__head">
                     <div className="dc__icon"><IcUser/></div>
                     <span className="dc__title">Your Profile</span>
-                    <span className="badge badge--best">👑 Best Results</span>
+                    {/* <span className="badge badge--best">👑 Best Results</span> */}
                   </div>
 
                   {/* Upload */}

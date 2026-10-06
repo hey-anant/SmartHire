@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { useAuth } from '../../auth/hooks/useAuth'
 import '../style/landing.scss'

@@ -46,11 +46,6 @@ export async function logout() {
 }
 
 export async function getMe() {
-  try {
-    const response=await api.get("/api/auth/get-me")
-    return response.data
-  } catch (error) {
-    // Don't log — 401 is expected when not logged in
-    throw error
-  }
+  const response = await api.get("/api/auth/get-me")
+  return response.data
 }

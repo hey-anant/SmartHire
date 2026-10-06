@@ -1,7 +1,6 @@
-import { createContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getMe } from "./services/auth.api";
-
-export const AuthContext=createContext()
+import { AuthContext } from "./auth.context.js";
 
 export const AuthProvider=({children})=>{
     
@@ -14,7 +13,7 @@ export const AuthProvider=({children})=>{
             try {
                 const data = await getMe()
                 setUser(data.user)
-            } catch (error) {
+            } catch {
                 // Expected 401 when not logged in — no need to log
                 setUser(null)
             } finally {

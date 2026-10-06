@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import { useState } from 'react'
 import { useNavigate,Link, Navigate } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
 import "../auth.form.scss"
@@ -10,14 +10,14 @@ const Register = () => {
   const [username, setusername] = useState("")
   const [email, setemail] = useState("")
   const [password, setpassword] = useState("")
-  const{user, loading, initializing, handleRegister}=useAuth()
+  const{user, initializing, handleRegister}=useAuth()
 
   const handleSubmit=async(e)=>{
     e.preventDefault()
     try {
       await handleRegister({username,email,password})
       navigate("/dashboard")
-    } catch (error) {
+    } catch {
       // Registration failed — stay on the page
     }
   }

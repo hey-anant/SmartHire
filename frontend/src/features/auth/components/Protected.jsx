@@ -1,6 +1,5 @@
 import { useAuth } from "../hooks/useAuth";
 import { Navigate } from "react-router";
-import React from 'react'
 import AuthLoading from './AuthLoading'
 
 const Protected = ({children}) => {
