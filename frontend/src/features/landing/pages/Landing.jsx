@@ -297,7 +297,7 @@ const Landing = () => {
                 <blockquote className="testimonial__quote">
                     "We've gone through hundreds of interview cycles — SmartHire is the only prep tool that actually understands our job descriptions and gives questions that matter."
                 </blockquote>
-                <p className="testimonial__attr">— Surya Kumar</p>
+                <p className="testimonial__attr">— Anant Kumar</p>
             </section>
 
             {/* ── Stats ── */}
