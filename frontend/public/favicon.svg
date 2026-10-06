@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <!-- Brain outline -->
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff2d78;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e1034d;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect width="48" height="48" rx="12" fill="#0d1117"/>
+  <!-- Brain icon -->
+  <g transform="translate(8, 7)" fill="none" stroke="url(#grad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Left hemisphere -->
+    <path d="M17 4C17 2.5 15.5 1 14 1C12.2 1 11 2.3 11 4C11 4 8 4 7 6.5C6 9 7 11 7 11C5.5 11.5 4 13 4 15.5C4 18 5.5 19.5 7 20C7 22 8 24 10.5 25C13 26 15 25.5 17 24"/>
+    <!-- Right hemisphere -->
+    <path d="M17 4C17 2.5 18.5 1 20 1C21.8 1 23 2.3 23 4C23 4 26 4 27 6.5C28 9 27 11 27 11C28.5 11.5 30 13 30 15.5C30 18 28.5 19.5 27 20C27 22 26 24 23.5 25C21 26 19 25.5 17 24"/>
+    <!-- Brain center line -->
+    <path d="M17 4L17 24"/>
+    <!-- Brain folds left -->
+    <path d="M7 12C9 12 11 11 13 13"/>
+    <path d="M7 17C10 17 12 16 14 18"/>
+    <!-- Brain folds right -->
+    <path d="M27 12C25 12 23 11 21 13"/>
+    <path d="M27 17C24 17 22 16 20 18"/>
+  </g>
+  <!-- Briefcase / Hire accent -->
+  <g transform="translate(14, 30)" fill="none" stroke="url(#grad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="0" y="3" width="20" height="12" rx="2"/>
+    <path d="M6 3V1.5A1.5 1.5 0 0 1 7.5 0h5A1.5 1.5 0 0 1 14 1.5V3"/>
+    <line x1="10" y1="7" x2="10" y2="11"/>
+    <line x1="8" y1="9" x2="12" y2="9"/>
+  </g>
+</svg>
