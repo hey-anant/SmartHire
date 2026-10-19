@@ -174,7 +174,6 @@ const Home = () => {
                   <div className="dc__head">
                     <div className="dc__icon"><IcUser/></div>
                     <span className="dc__title">Your Profile</span>
-                    {/* <span className="badge badge--best">👑 Best Results</span> */}
                   </div>
 
                   {/* Upload */}

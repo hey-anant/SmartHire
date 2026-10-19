@@ -25,14 +25,14 @@
     transition: all 0.25s ease;
 
     &.primary-button {
-        background-color: #4ecdc4;
+        background-color: #00aeef;
         color: white;
-        box-shadow: 0 3px 14px rgba(78, 205, 196, 0.30);
+        box-shadow: 0 6px 16px rgba(0, 174, 239, 0.24);
 
         &:hover {
-            background-color: #37b3aa;
+            background-color: #0099d1;
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(78, 205, 196, 0.40);
+            box-shadow: 0 8px 20px rgba(0, 174, 239, 0.3);
         }
 
         &--loading {
@@ -40,10 +40,10 @@
             pointer-events: none;
             background: linear-gradient(
                 110deg,
-                #4ecdc4 0%,
-                #7eddd8 30%,
-                #4ecdc4 60%,
-                #7eddd8 100%
+                #00aeef 0%,
+                #64d2ff 30%,
+                #00aeef 60%,
+                #64d2ff 100%
             );
             background-size: 200% 100%;
             animation: shimmer 2s ease-in-out infinite;
@@ -70,14 +70,4 @@
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
     flex-shrink: 0;
-}
-
-.button.primary-button {
-    background-color: #00aeef;
-    box-shadow: 0 6px 16px rgba(0, 174, 239, 0.24);
-
-    &:hover {
-        background-color: #0099d1;
-        box-shadow: 0 8px 20px rgba(0, 174, 239, 0.3);
-    }
 }

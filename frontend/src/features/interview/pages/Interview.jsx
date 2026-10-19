@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import '../style/interview.scss'
 import { useInterview } from '../hooks/useInterview.js'
 import { useParams } from 'react-router'
@@ -65,14 +65,8 @@ const ResumeIcon = () => (
 const Interview = () => {
     const [ activeNav, setActiveNav ] = useState('technical')
     const [ mobileMenuOpen, setMobileMenuOpen ] = useState(false)
-    const { report, getReportById, loading, resumeLoading, getResumePdf } = useInterview()
+    const { report, loading, resumeLoading, getResumePdf } = useInterview()
     const { interviewId } = useParams()
-
-    useEffect(() => {
-        if (interviewId) {
-            getReportById(interviewId)
-        }
-    }, [ interviewId, getReportById ])
 
 
 

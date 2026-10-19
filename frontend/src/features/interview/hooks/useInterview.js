@@ -1,6 +1,6 @@
 import { getAllInterviewReports, generateInterviewReport, getInterviewReportById, generateResumePdf } from "../services/interview.api"
 import { useCallback, useContext, useEffect } from "react"
-import { InterviewContext } from "../interview.context"
+import { InterviewContext } from "../interview.context.jsx"
 import { useParams } from "react-router"
 
 

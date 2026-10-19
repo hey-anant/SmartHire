@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { InterviewContext } from "./interview.context.js";
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useState } from "react";
+
+export const InterviewContext = createContext();
 
 export const InterviewProvider = ({ children }) => {
     const [loading, setLoading] = useState(false)
