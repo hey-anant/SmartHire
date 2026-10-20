@@ -743,10 +743,11 @@ $font: 'Inter', system-ui, sans-serif;
 
 .gen-btn {
     background: #00aeef;
-    color: #ffffff;
+    color: rgb(29, 177, 236);
     box-shadow: 0 6px 16px rgba(0, 174, 239, 0.24);
 
     &:hover { background: #0099d1; box-shadow: 0 8px 20px rgba(0, 174, 239, 0.3); }
+
 }
 
 .gen-bar__info { color: #657386; .flash { color: #00aeef; } }
