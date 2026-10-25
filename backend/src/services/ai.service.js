@@ -6,6 +6,23 @@ const openai = new OpenAI({
     apiKey: process.env.OPENROUTER_API_KEY || process.env.OPENAI_API_KEY,
 });
 
+function parseJsonResponse(response, operation) {
+    const message = response?.choices?.[0]?.message;
+    const content = typeof message?.content === "string" ? message.content.trim() : "";
+
+    if (message?.refusal || !content) {
+        throw new Error(`AI could not generate ${operation}: ${message?.refusal || "empty response"}`);
+    }
+
+    const jsonContent = content.replace(/^```json\s*|\s*```$/g, "").trim();
+
+    try {
+        return JSON.parse(jsonContent);
+    } catch {
+        throw new Error(`AI returned an invalid ${operation} response.`);
+    }
+}
+
 const interviewReportSchema = {
     type: "object",
     properties: {
@@ -148,7 +165,7 @@ Remember: Each question in technicalQuestions and behavioralQuestions MUST inclu
         }
     });
 
-    const report = JSON.parse(response.choices[0].message.content);
+    const report = parseJsonResponse(response, "interview report");
 
     // Post-processing: ensure every question has an answer field
     const ensureAnswers = (questions) => {
@@ -255,7 +272,7 @@ Tailor the resume for the given job description. Highlight the candidate's stren
         }
     });
 
-    const jsonContent = JSON.parse(response.choices[0].message.content);
+    const jsonContent = parseJsonResponse(response, "resume");
 
     const pdfBuffer = await generatePdfFromHtml(jsonContent.html);
 
