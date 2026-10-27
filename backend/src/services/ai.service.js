@@ -8,19 +8,40 @@ const openai = new OpenAI({
 
 function parseJsonResponse(response, operation) {
     const message = response?.choices?.[0]?.message;
-    const content = typeof message?.content === "string" ? message.content.trim() : "";
+    let content = typeof message?.content === "string" ? message.content.trim() : "";
 
     if (message?.refusal || !content) {
         throw new Error(`AI could not generate ${operation}: ${message?.refusal || "empty response"}`);
     }
 
-    const jsonContent = content.replace(/^```json\s*|\s*```$/g, "").trim();
+    // 1. Remove reasoning / thinking tags if present (e.g. <think>...</think> from DeepSeek/Qwen)
+    content = content.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
 
+    // 2. Try direct JSON.parse first
     try {
-        return JSON.parse(jsonContent);
-    } catch {
-        throw new Error(`AI returned an invalid ${operation} response.`);
+        return JSON.parse(content);
+    } catch {}
+
+    // 3. Extract JSON from markdown code fence ```json ... ``` or ``` ... ```
+    const codeBlockMatch = content.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+    if (codeBlockMatch && codeBlockMatch[1]) {
+        try {
+            return JSON.parse(codeBlockMatch[1].trim());
+        } catch {}
     }
+
+    // 4. Extract substring between the first '{' and the last '}'
+    const firstBrace = content.indexOf("{");
+    const lastBrace = content.lastIndexOf("}");
+    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+        const jsonSubstring = content.substring(firstBrace, lastBrace + 1);
+        try {
+            return JSON.parse(jsonSubstring);
+        } catch {}
+    }
+
+    console.error(`AI returned unparseable content for ${operation}:`, content);
+    throw new Error(`AI returned an invalid ${operation} response.`);
 }
 
 const interviewReportSchema = {
@@ -130,7 +151,9 @@ CRITICAL RULES:
 1. Every object in "technicalQuestions" MUST have exactly 3 fields: "question", "intention", "answer"
 2. Every object in "behavioralQuestions" MUST have exactly 3 fields: "question", "intention", "answer"
 3. The "answer" field MUST be a detailed, multi-sentence guide explaining HOW to answer the question
-4. NEVER omit the "answer" field - it is the most important field for the candidate`;
+4. NEVER omit the "answer" field - it is the most important field for the candidate
+5. Provide 4-5 technical questions, 3-4 behavioral questions, 3-5 skill gaps, and a 5-7 day preparation plan
+6. Return raw valid JSON ONLY. Do not wrap in markdown or add any conversational text`;
 
 async function generateInterviewReport({resume, selfDescription, jobDescription}) {
 
@@ -143,7 +166,7 @@ Job Description: ${jobDescription}
 Remember: Each question in technicalQuestions and behavioralQuestions MUST include "question", "intention", AND "answer" fields. The "answer" must be a detailed guide on how to answer.`
 
     const response = await openai.chat.completions.create({
-        model: "openrouter/free",
+        model: process.env.AI_MODEL || "openrouter/free",
         max_tokens: 8000,
         messages: [
             {
@@ -258,7 +281,7 @@ Job Description: ${jobDescription}
 Tailor the resume for the given job description. Highlight the candidate's strengths and relevant experience. The HTML should include inline/embedded CSS and be ready to convert to PDF. Keep it to 1-2 pages, ATS-friendly, and natural-sounding.`;
 
     const response = await openai.chat.completions.create({
-        model: "openrouter/free",
+        model: process.env.AI_MODEL || "openrouter/free",
         max_tokens: 3000,
         messages: [
             {
